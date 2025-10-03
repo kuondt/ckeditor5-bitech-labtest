@@ -1,53 +1,61 @@
-// Base64 Upload Adapter cho CKEditor 5
-export default class Base64UploadAdapter {
-    static get pluginName() {
-        return 'Base64UploadAdapter';
-    }
+// src/plugins/Base64UploadAdapter.ts
+import {
+  Plugin,
+  type FileLoader,
+  type UploadAdapter,
+  type FileRepository,
+} from "ckeditor5";
 
-    static get requires() {
-        return ['FileRepository'];
-    }
+export default class Base64UploadAdapter extends Plugin {
+  public static get pluginName() {
+    return "Base64UploadAdapter" as const;
+  }
 
-    init() {
-        if (!this.editor.plugins.has('FileRepository')) {
-            return;
-        }
+  // Đảm bảo FileRepository được load trước
+  public static get requires() {
+    return ["FileRepository"] as const;
+  }
 
-        const fileRepository = this.editor.plugins.get('FileRepository');
+  public init(): void {
+    const fileRepository = this.editor.plugins.get(
+      "FileRepository"
+    ) as FileRepository;
 
-        fileRepository.registerUploadAdapter('base64Upload', (loader: any) => {
-            return new Base64UploadAdapterHelper(loader);
-        });
-    }
+    // Gắn factory tạo adapter
+    fileRepository.createUploadAdapter = (loader: FileLoader) => {
+      return new Base64UploadAdapterHelper(loader);
+    };
+  }
 }
 
-class Base64UploadAdapterHelper {
-    private loader: any;
-    private reader: FileReader;
+class Base64UploadAdapterHelper implements UploadAdapter {
+  private loader: FileLoader;
+  private reader: FileReader;
 
-    constructor(loader: any) {
-        this.loader = loader;
-        this.reader = new FileReader();
+  constructor(loader: FileLoader) {
+    this.loader = loader;
+    this.reader = new FileReader();
+  }
+
+  public upload(): Promise<{ default: string }> {
+    return this.loader.file.then((file) => {
+      return new Promise((resolve, reject) => {
+        this.reader.onload = () => {
+          // Reader.result có thể là string | ArrayBuffer – ta ép về string
+          resolve({ default: String(this.reader.result) });
+        };
+        this.reader.onerror = () =>
+          reject(this.reader.error || new Error("File reading error"));
+        this.reader.onabort = () => reject(new Error("File reading aborted"));
+
+        this.reader.readAsDataURL(file as File);
+      });
+    });
+  }
+
+  public abort(): void {
+    if (this.reader && this.reader.readyState === this.reader.LOADING) {
+      this.reader.abort();
     }
-
-    upload(): Promise<any> {
-        return new Promise((resolve, reject) => {
-            this.reader.onload = () => {
-                resolve({
-                    default: this.reader.result
-                });
-            };
-
-            this.reader.onerror = (error) => reject(error);
-            this.reader.onabort = () => reject(new Error('FileReader was aborted'));
-
-            return this.loader.file.then((file: File) => this.reader.readAsDataURL(file));
-        });
-    }
-
-    abort(): void {
-        if (this.reader.readyState === this.reader.LOADING) {
-            this.reader.abort();
-        }
-    }
+  }
 }

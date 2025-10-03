@@ -20,24 +20,43 @@ npm install ckeditor5-bitech-labtest
 
 ## Sử dụng
 
-### Cách sử dụng cơ bản
+### Cách sử dụng chuẩn CKEditor React (Khuyến nghị)
 
 ```tsx
 import React from 'react';
-import { BiTechCKEditor } from 'ckeditor5-bitech-labtest';
-import 'ckeditor5-bitech-labtest/dist/styles/mathlive.css';
+import { CKEditor, BiTechEditor } from 'ckeditor5-bitech-labtest';
 
 function MyEditor() {
-  const handleChange = (event, editor) => {
-    const data = editor.getData();
-    console.log('Content changed:', data);
-  };
-
   return (
-    <BiTechCKEditor
-      initialData="<p>Nhập nội dung của bạn...</p>"
-      onChange={handleChange}
-      placeholder="Nhập nội dung của bạn vào đây..."
+    <CKEditor
+      editor={BiTechEditor}
+      data="<p>Hello world!</p>"
+      config={{ licenseKey: "GPL" }}
+      onChange={(event, editor) => {
+        console.log(editor.getData());
+      }}
+    />
+  );
+}
+```
+
+### Sử dụng với state management
+
+```tsx
+import React, { useState } from 'react';
+import { CKEditor, BiTechEditor } from 'ckeditor5-bitech-labtest';
+
+function MyEditor() {
+  const [content, setContent] = useState('<p>Initial content here!</p>');
+  
+  return (
+    <CKEditor
+      editor={BiTechEditor}
+      data={content}
+      config={{ licenseKey: "GPL" }}
+      onChange={(event, editor) => {
+        setContent(editor.getData());
+      }}
     />
   );
 }

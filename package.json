@@ -1,8 +1,8 @@
 {
   "name": "ckeditor5-bitech-labtest",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "type": "module",
-  "description": "CKEditor 5 build with Base64 image upload and MathLive integration for BiTech LabTest",
+  "description": "BiTech CKEditor 5 - Extended editor class with Base64 upload for easy integration with @ckeditor/ckeditor5-react",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
