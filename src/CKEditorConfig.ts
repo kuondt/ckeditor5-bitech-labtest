@@ -1,0 +1,235 @@
+import {
+	ClassicEditor,
+	Autosave,
+	Essentials,
+	Paragraph,
+	List,
+	Fullscreen,
+	MediaEmbed,
+	Bold,
+	Italic,
+	Underline,
+	Strikethrough,
+	Code,
+	Subscript,
+	Superscript,
+	FontBackgroundColor,
+	FontColor,
+	FontFamily,
+	FontSize,
+	Highlight,
+	Link,
+	Heading,
+	BlockQuote,
+	CodeBlock,
+	Indent,
+	IndentBlock,
+	Alignment,
+	GeneralHtmlSupport,
+	ImageInline,
+	ImageToolbar,
+	ImageBlock,
+	ImageUpload,
+	CloudServices,
+	ImageInsertViaUrl,
+	AutoImage,
+	Table,
+	TableToolbar,
+	PlainTableOutput,
+
+TableCaption,
+	SourceEditing
+} from 'ckeditor5';
+
+import Base64UploadAdapter from './plugins/Base64UploadAdapter';
+import MathLivePlugin from './plugins/MathLive';
+import translations from 'ckeditor5/translations/vi.js';
+
+export interface CKEditorConfig {
+	toolbar: Record<string, any>;
+	plugins: any[];
+	[key: string]: any;
+}
+
+export const createCKEditorConfig = (licenseKey?: string): CKEditorConfig => {
+	return {
+		toolbar: {
+			items: [
+				'undo',
+				'redo',
+				'|',
+				'sourceEditing',
+				'fullscreen',
+				'mathLive',
+				'|',
+				'heading',
+				'|',
+				'fontSize',
+				'fontFamily',
+				'fontColor',
+				'fontBackgroundColor',
+				'|',
+				'bold',
+				'italic',
+				'underline',
+				'strikethrough',
+				'subscript',
+				'superscript',
+				'code',
+				'|',
+				'link',
+				'mediaEmbed',
+				'insertTable',
+				'highlight',
+				'blockQuote',
+				'codeBlock',
+				'|',
+				'alignment',
+				'|',
+				'bulletedList',
+				'numberedList',
+				'outdent',
+				'indent',
+				'|',
+				'imageUpload'
+			],
+			shouldNotGroupWhenFull: true
+		},
+		plugins: [
+			Alignment,
+			AutoImage,
+			Autosave,
+			BlockQuote,
+			Bold,
+			CloudServices,
+			Code,
+			CodeBlock,
+			Essentials,
+			FontBackgroundColor,
+			FontColor,
+			FontFamily,
+			FontSize,
+			Fullscreen,
+			GeneralHtmlSupport,
+			Heading,
+			Highlight,
+			ImageBlock,
+			ImageInline,
+			ImageInsertViaUrl,
+			ImageToolbar,
+			ImageUpload,
+			Indent,
+			IndentBlock,
+			Italic,
+			Link,
+			List,
+			MathLivePlugin,
+			MediaEmbed,
+			Paragraph,
+			PlainTableOutput,
+			SourceEditing,
+			Strikethrough,
+			Subscript,
+			Superscript,
+			Base64UploadAdapter,
+			Table,
+			TableCaption,
+			TableToolbar,
+			Underline
+		],
+		fontFamily: {
+			supportAllValues: true
+		},
+		fontSize: {
+			options: [10, 12, 14, 'default', 18, 20, 22],
+			supportAllValues: true
+		},
+		fullscreen: {
+			onEnterCallback: (container: HTMLElement) =>
+				container.classList.add(
+					'editor-container',
+					'editor-container_classic-editor',
+					'editor-container_include-fullscreen',
+					'main-container'
+				)
+		},
+		heading: {
+			options: [
+				{
+					model: 'paragraph',
+					title: 'Paragraph',
+					class: 'ck-heading_paragraph'
+				},
+				{
+					model: 'heading1',
+					view: 'h1',
+					title: 'Heading 1',
+					class: 'ck-heading_heading1'
+				},
+				{
+					model: 'heading2',
+					view: 'h2',
+					title: 'Heading 2',
+					class: 'ck-heading_heading2'
+				},
+				{
+					model: 'heading3',
+					view: 'h3',
+					title: 'Heading 3',
+					class: 'ck-heading_heading3'
+				},
+				{
+					model: 'heading4',
+					view: 'h4',
+					title: 'Heading 4',
+					class: 'ck-heading_heading4'
+				},
+				{
+					model: 'heading5',
+					view: 'h5',
+					title: 'Heading 5',
+					class: 'ck-heading_heading5'
+				},
+				{
+					model: 'heading6',
+					view: 'h6',
+					title: 'Heading 6',
+					class: 'ck-heading_heading6'
+				}
+			]
+		},
+		htmlSupport: {
+			allow: [
+				{
+					name: /^.*$/,
+					styles: true,
+					attributes: true,
+					classes: true
+				}
+			]
+		},
+		image: {
+			toolbar: []
+		},
+		language: 'vi',
+		licenseKey: licenseKey,
+		link: {
+			addTargetToExternalLinks: true,
+			defaultProtocol: 'https://',
+			decorators: {
+				toggleDownloadable: {
+					mode: 'manual',
+					label: 'Downloadable',
+					attributes: {
+						download: 'file'
+					}
+				}
+			}
+		},
+		placeholder: 'Nhập hoặc dán nội dung của bạn vào đây!',
+		table: {
+			contentToolbar: ['tableColumn', 'tableRow', 'mergeTableCells']
+		},
+		translations: [translations]
+	};
+};
