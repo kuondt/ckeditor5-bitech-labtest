@@ -1,6 +1,6 @@
 import React from 'react';
 import { CKEditor } from "@ckeditor/ckeditor5-react";
-import { createBasicConfig } from "./BasicCKEditorConfig";
+// import { createBasicConfig } from "./BasicCKEditorConfig";
 import "./styles/index.css";
 import BiTechEditor from "./BiTechEditor";
 
@@ -13,13 +13,13 @@ export default function SimpleCKEditor({
   initialData = "",
   onChange,
 }: SimpleCKEditorProps) {
-  const config = createBasicConfig();
+  // const config = createBasicConfig();
 
   return (
     <div className="main-container">
       <CKEditor
         editor={BiTechEditor}
-        config={config}
+        // config={config}
         data={initialData}
         onChange={onChange}
       />

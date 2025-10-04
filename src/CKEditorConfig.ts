@@ -78,7 +78,6 @@ export const createCKEditorConfig = (licenseKey?: string): CKEditorConfig => {
         "link",
         "mediaEmbed",
         "insertTable",
-        "highlight",
         "blockQuote",
         "codeBlock",
         "|",

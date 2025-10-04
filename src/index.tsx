@@ -11,7 +11,7 @@ export default BiTechEditor;
 export { default as BiTechEditor } from "./BiTechEditor";
 
 // Export configuration helper
-export { createCKEditorConfig } from "./CKEditorConfig";
+// export { createCKEditorConfig } from "./CKEditorConfig";
 export type { CKEditorConfig } from "./CKEditorConfig";
 
 // Export plugins

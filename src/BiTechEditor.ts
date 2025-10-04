@@ -49,6 +49,8 @@ import Base64UploadAdapter from "./plugins/Base64UploadAdapter";
 import vi from "ckeditor5/translations/vi.js";
 
 export default class BiTechEditor extends ClassicEditor {
+  public static EditorWatchdog = ClassicEditor.EditorWatchdog;
+  public static ContextWatchdog = ClassicEditor.ContextWatchdog;
   public static override get builtinPlugins() {
     return [
       // Essentials
@@ -122,12 +124,12 @@ export default class BiTechEditor extends ClassicEditor {
 
   public static override get defaultConfig() {
     return {
+      licenseKey: "GPL",
       toolbar: {
         items: [
           "undo",
           "redo",
           "|",
-          "sourceEditing",
           "fullscreen",
           "|",
           "heading",
@@ -136,6 +138,7 @@ export default class BiTechEditor extends ClassicEditor {
           "fontFamily",
           "fontColor",
           "fontBackgroundColor",
+          "alignment",
           "|",
           "bold",
           "italic",
@@ -143,23 +146,12 @@ export default class BiTechEditor extends ClassicEditor {
           "strikethrough",
           "subscript",
           "superscript",
-          "code",
           "|",
+          "insertImage",
           "link",
           "mediaEmbed",
           "insertTable",
-          "highlight",
           "blockQuote",
-          "codeBlock",
-          "|",
-          "alignment",
-          "|",
-          "bulletedList",
-          "numberedList",
-          "outdent",
-          "indent",
-          "|",
-          "insertImage", // dropdown “Image insert” (tự thu thập các phương thức: URL, Upload, v.v.)
         ],
         shouldNotGroupWhenFull: true,
       },
