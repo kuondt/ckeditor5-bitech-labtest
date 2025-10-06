@@ -10,10 +10,6 @@ export default BiTechEditor;
 // Named export để dễ import
 export { default as BiTechEditor } from "./BiTechEditor";
 
-// Export configuration helper
-// export { createCKEditorConfig } from "./CKEditorConfig";
-export type { CKEditorConfig } from "./CKEditorConfig";
-
 // Export plugins
 export { default as Base64UploadAdapter } from "./plugins/Base64UploadAdapter";
 
