@@ -1,6 +1,5 @@
 // src/BiTechEditor.ts
 import {
-  ClassicEditor,
   Alignment,
   AutoImage,
   Autosave,
@@ -14,7 +13,7 @@ import {
   FontColor,
   FontFamily,
   FontSize,
-  Fullscreen,
+  // Fullscreen,
   GeneralHtmlSupport,
   Heading,
   Highlight,
@@ -77,7 +76,7 @@ export const createBasicConfig = () => {
       FontFamily,
       FontSize,
       Highlight,
-      Fullscreen,
+      // Fullscreen,
       GeneralHtmlSupport,
       ImageBlock,
       ImageInline,

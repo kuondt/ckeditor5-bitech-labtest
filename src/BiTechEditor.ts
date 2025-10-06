@@ -14,7 +14,7 @@ import {
   FontColor,
   FontFamily,
   FontSize,
-  Fullscreen,
+  // Fullscreen,
   GeneralHtmlSupport,
   Heading,
   Highlight,
@@ -47,6 +47,8 @@ import Base64UploadAdapter from "./plugins/Base64UploadAdapter";
 
 // dịch tiếng Việt – cách cài đặt mới: import object rồi pass vào config.translations
 import vi from "ckeditor5/translations/vi.js";
+import "mathlive/static.css";
+import "mathlive";
 
 export default class BiTechEditor extends ClassicEditor {
   public static EditorWatchdog = ClassicEditor.EditorWatchdog;
@@ -109,7 +111,7 @@ export default class BiTechEditor extends ClassicEditor {
       SourceEditing,
 
       // Fullscreen
-      Fullscreen,
+      // Fullscreen,
 
       // Hỗ trợ HTML tự do
       GeneralHtmlSupport,
